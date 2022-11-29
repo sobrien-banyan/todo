@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from django.views import View
 from todo_app.models import Task
@@ -27,16 +27,5 @@ class HomeView(View):
         task_form = TaskForm(request.POST)
 
         task_form.save()
-        tasks = Task.objects.all()
-        print(tasks)
-        # task_form = TaskForm()
-        html_data = {
-            'task_list': tasks,
-            'form': task_form,
-        }
 
-        return render(
-            request=request,
-            template_name='index.html',
-            content_type=html_data,
-        )
+        return redirect('home')
