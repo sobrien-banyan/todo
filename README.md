@@ -6,15 +6,15 @@
 3. Install Django ‘pip install django’
 4. Create a django project with ‘Django-admin startproject <project_name>’
 5. ‘pip3 freeze > requirements.txt’
-6. Run ‘python3 manage.py runserver’ to see if it worded. -> install Django in the app  ` ‘pip install django’`
+6. Run ‘python3 manage.py runserver’ to see if it worked. -> install Django in the app  ` ‘pip install django’`
 7. Create an ‘app’ inside your project with ‘python3 manage.py startapp <app_name>’
 8. Install your new app in your projects setting file
 
 
-### In sandwich_server/setting add:
+### In todo_site/setting add:
 ```
 INSTALLED_APPS = [
-    'sandwich_app.app.SandwichAppConfig',
+    'todo_app.apps.TodoAppConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -24,22 +24,28 @@ INSTALLED_APPS = [
 ]
 ```
 
-### In sandwich_server/urls.py add:
-```
-from django.contrib import admin
-from django.urls import include, path
-
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('sandwich/', include('sandwich_app.urls')),
-]
-```
-
-### In sandwich_app create a file called urls.py and add:
+### In todo_site/urls.py add:
 ```
 from django.urls import path
 
-urlpatterns = []
+from todo_app.views import HomeView, TaskDetailsView
+
+urlpatterns = [
+    path('', HomeView.as_view(), name='home'),
+    path('<int:task_id>', TaskDetailsView.as_view(), name='task_details'),
+]
+```
+
+### In todo_app create a file called urls.py and add:
+```
+from django.urls import path
+
+from todo_app.views import HomeView, TaskDetailsView
+
+urlpatterns = [
+    path('', HomeView.as_view(), name='home'),
+    path('<int:task_id>', TaskDetailsView.as_view(), name='task_details'),
+]
 ```
 
 
