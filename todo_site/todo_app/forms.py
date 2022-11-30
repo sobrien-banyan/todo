@@ -14,7 +14,7 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ['body']
 
-    def __def__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         task = kwargs.pop('task_object')
         super().__init__(*args, **kwargs)
 
