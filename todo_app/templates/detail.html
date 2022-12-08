@@ -16,9 +16,25 @@
     <input type='submit' name="add" value='Add'/>
 </form>
 
+<h2>Comments</h2>
 <ul>
     {% for comment in comment_list %}
     <li>{{ comment.body }}</li>
 
     {% endfor %}
 </ul>
+
+<h2>Tags</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ tag_form }}
+    <input type='submit' name="create" value='Create Tag'/>
+</form>
+
+{% for tag in tag_list %}
+    {{tag.name}}
+    {% if not forloop.last %}
+    |
+    {% endif %}
+{% endfor %}
