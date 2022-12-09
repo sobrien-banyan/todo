@@ -4,7 +4,11 @@
 ## Created by 
 Sean Obrien - GITHUB: sobrien-banyan
 
-### Python3, Html, CSS, Django 
+![Home page](./images/home_page.png)
+
+![Task page](./images/task_page.png)
+
+### Python3, Html, CSS, Django, bootstrap 
 
 
 
