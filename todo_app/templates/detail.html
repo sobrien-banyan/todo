@@ -1,45 +1,78 @@
-<h2><a href="{% url 'home' %}">Home</a></h2>
+{% load bootstrap5 %}
 
-<h2>Task: {{ task_object.description|upper }}</h2>
+{% bootstrap_css %}
+{% bootstrap_javascript %}
 
+<!DOCTYPE html>
+<html lang="en">
 
-<form method="POST">
-    {% csrf_token %}
-    {{ form }}
-    <input type='submit' name="update" value='Update'/>
-    <input type='submit' name="delete" value='Delete'/>
-    {% if task_object.isComplete == True %}
-    <input type='submit' name="incomplete" value="Incomplete"/>
-    {% else %}
-    <input type='submit' name="complete" value="Complete"/>
-    {% endif %}
-</form>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task</title>
+</head>
 
-<form method="POST">
-    {% csrf_token %}
-    {{ comment_form }}
-    <input type='submit' name="add" value='Add'/>
-</form>
+<body>
+    <div class="container m-5">
 
-<h2>Comments</h2>
-<ul>
-    {% for comment in comment_list %}
-    <li>{{ comment.body }}</li>
+        <h2><a href="{% url 'home' %}">Home</a></h2>
 
-    {% endfor %}
-</ul>
+        <h2>Task: {{ task_object.description|upper }}</h2>
 
-<h2>Tags</h2>
+        <div class="mt-4 p-5 bg-primary text-white rounded">
+            <form method="POST">
+                {% csrf_token %}
+                {{ bootstrap_form }}
+                {{ form }}
+                <button type='submit' name="update" value='Update' class="btn btn-primary">Update</button>
+                <button type='submit' name="delete" value='Delete' class="btn btn-primary">Delete</button>
+                {% if task_object.isComplete == True %}
+                <button type='submit' name="incomplete" value="Incomplete" class="btn btn-primary">Incomplete</button>
+                {% else %}
+                <button type='submit' name="complete" value="Complete" class="btn btn-primary">Complete</button>
+                {% endif %}
+            </form>
+        </div>
+        <hr />
 
-<form method="POST">
-    {% csrf_token %}
-    {{ tag_form }}
-    <input type='submit' name="create" value='Create Tag'/>
-</form>
+        <div class="mt-4 p-5 bg-primary text-white rounded">
+            <h2>Enter Comment in text box</h2>
+            <form method="POST">
+                {% csrf_token %}
+                {{ bootstrap_form }}
+                {{ comment_form }}
+                <button type='submit' name="add" value='Add' class="btn btn-primary">Add</button>
+            </form>
 
-{% for tag in tag_list %}
-    {{tag.name}}
-    {% if not forloop.last %}
-    |
-    {% endif %}
-{% endfor %}
+            <h3>Comments</h3>
+            <ul>
+                {% for comment in comment_list %}
+                <li>{{ comment.body }}</li>
+
+                {% endfor %}
+            </ul>
+        </div>
+        <hr />
+
+        <div class="mt-4 p-5 bg-primary text-white rounded">
+            <h2>Enter Tag in the input box</h2>
+
+            <form method="POST">
+                {% csrf_token %}
+                {{ bootstrap_form }}
+                {{ tag_form }}
+                <button type='submit' name="create" value='Create Tag' class="btn btn-primary">Create Tag</button>
+            </form>
+            <h3>Tags</h3>
+            {% for tag in tag_list %}
+            {{tag.name}}
+            {% if not forloop.last %}
+            |
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>

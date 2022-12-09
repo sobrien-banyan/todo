@@ -1,25 +1,63 @@
-<h1>Tasks</h1>
+{% load bootstrap5 %}
 
-<form method="POST" action="{% url 'home' %}">
-    {% csrf_token %}
-    {{ form }}
-    <input type='submit' name="create" value='Create' />
-</form>
+{% bootstrap_css %}
+{% bootstrap_javascript %}
 
-<h2>Completed</h2>
-<ul>
-    {% for task in task_list %}
-    {% if task.isComplete == True %}
-    <li><a href="{% url 'task_detail' task.id %}">{{ task.description }}</a></li>
-    {% endif %}
-    {% endfor %}
-</ul>
-<hr/>
-<h2>Not Completed</h2>
-<ul>
-    {% for task in task_list %}
-    {% if task.isComplete == False %}
-    <li><a href="{% url 'task_detail' task.id %}">{{ task.description }}</a></li>
-    {% endif %}
-    {% endfor %}
-</ul>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasks</title>
+</head>
+
+<body>
+    <div class="container m-5">
+
+
+        <h1>Tasks</h1>
+        <div class="mt-4 p-5 bg-primary text-white rounded">
+            <h2>Entering a new task</h2>
+            <form method="POST" action="{% url 'home' %}">
+                {% csrf_token %}
+                {{ bootstrap_form }}
+                {{ form }}
+                <button type='submit' name="create" value='Create' class="btn btn-primary">Create</button>
+            </form>
+        </div>
+        <br/>
+        <h2>Completed</h2>
+        <div class="d-flex flex-wrap p-3 bg-secondary rounded">
+        {% for task in task_list %}
+        {% if task.isComplete == True %}
+        <div class="card m-1" style="width:400px">
+            <div class="card-body">
+              <h4 class="card-title"><a href="{% url 'task_detail' task.id %}">{{ task.description }}</a></h4>
+              <p class="card-text">Date created: {{ task.created_at }}</p>
+            </div>
+          </div>
+        {% endif %}
+        {% endfor %}
+        </div>
+
+        <hr />
+
+        <h2>Not Completed</h2>
+        <div class="d-flex flex-wrap p-3 bg-secondary rounded">
+            {% for task in task_list %}
+            {% if task.isComplete == False %}
+            <div class="card m-1" style="width:400px">
+                <div class="card-body">
+                  <h4 class="card-title"><a href="{% url 'task_detail' task.id %}">{{ task.description }}</a></h4>
+                  <p class="card-text">Date created: {{ task.created_at }}</p>
+                </div>
+              </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>

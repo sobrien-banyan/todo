@@ -52,7 +52,8 @@ And go to `http://localhost:8000` or `http://127.0.0.1:8000/`
 1. Clone the repo to your computer
 2. run `source venv/bin/activate` 
 3. run `pip install -r requirements.txt`
-4. run `python manage.py runserver`
+4. run `python manage.py migrate`
+5. run `python manage.py runserver`
 
 
 
