@@ -3,12 +3,23 @@
 <form method="POST" action="{% url 'home' %}">
     {% csrf_token %}
     {{ form }}
-    <input type='submit' name="create" value='Create'/>
+    <input type='submit' name="create" value='Create' />
 </form>
 
+<h2>Completed</h2>
 <ul>
     {% for task in task_list %}
+    {% if task.isComplete == True %}
     <li><a href="{% url 'task_detail' task.id %}">{{ task.description }}</a></li>
-
+    {% endif %}
+    {% endfor %}
+</ul>
+<hr/>
+<h2>Not Completed</h2>
+<ul>
+    {% for task in task_list %}
+    {% if task.isComplete == False %}
+    <li><a href="{% url 'task_detail' task.id %}">{{ task.description }}</a></li>
+    {% endif %}
     {% endfor %}
 </ul>

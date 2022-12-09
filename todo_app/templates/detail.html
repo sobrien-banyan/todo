@@ -1,6 +1,6 @@
 <h2><a href="{% url 'home' %}">Home</a></h2>
 
-<h2>Task</h2>
+<h2>Task: {{ task_object.description|upper }}</h2>
 
 
 <form method="POST">
@@ -8,6 +8,11 @@
     {{ form }}
     <input type='submit' name="update" value='Update'/>
     <input type='submit' name="delete" value='Delete'/>
+    {% if task_object.isComplete == True %}
+    <input type='submit' name="incomplete" value="Incomplete"/>
+    {% else %}
+    <input type='submit' name="complete" value="Complete"/>
+    {% endif %}
 </form>
 
 <form method="POST">

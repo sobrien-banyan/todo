@@ -61,17 +61,30 @@ class TaskDetailsView(View):
          if 'update' in request.POST:
             task_form = TaskForm(request.POST, instance=task)
             task_form.save()
+
          elif 'delete' in request.POST:
             task.delete()
+
+         elif 'complete' in request.POST:
+            task.isComplete = True
+            print(task.isComplete)
+            task.save()
+            return redirect('task_detail', task.id)
+
+         elif 'incomplete' in request.POST:
+            task.isComplete = False
+            print(task.isComplete)
+            task.save()
+            return redirect('task_detail', task.id)
+
          elif 'add' in request.POST:
             comment_form = CommentForm(request.POST, task_object=task)
             comment_form.save()
-
             return redirect('task_detail', task.id)
+
          elif 'create' in request.POST:
             tag_form = TagForm(request.POST, instance=task)
             tag_form.save(task)
-
             return redirect('task_detail', task.id)
 
          return redirect('home')

@@ -71,7 +71,7 @@ And go to `http://localhost:8000` or `http://127.0.0.1:8000/`
 3. Install Django ‘pip install django’
 4. Create a django project with ‘Django-admin startproject <project_name>’
 5. ‘pip3 freeze > requirements.txt’
-6. Run ‘python3 manage.py runserver’ to see if it worked. -> install Django in the app  ` ‘pip install django’`
+6. Run ‘python3 manage.py runserver’
 7. Create an ‘app’ inside your project with ‘python3 manage.py startapp <app_name>’
 8. Install your new app in your projects setting file
 
